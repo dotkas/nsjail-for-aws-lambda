@@ -340,14 +340,14 @@ bool containProc(nsjconf_t* nsjconf) {
 	RETURN_ON_FAILURE(containInitNetNs(nsjconf));
 	RETURN_ON_FAILURE(containInitUtsNs(nsjconf));
 	RETURN_ON_FAILURE(containInitCgroupNs());
-	RETURN_ON_FAILURE(containDropPrivs(nsjconf));
+//	RETURN_ON_FAILURE(containDropPrivs(nsjconf));
 	;
 	/* */
 	/* As non-root */
 	RETURN_ON_FAILURE(containCPU(nsjconf));
 	RETURN_ON_FAILURE(containTSC(nsjconf));
 	RETURN_ON_FAILURE(containSetLimits(nsjconf));
-	RETURN_ON_FAILURE(containPrepareEnv(nsjconf));
+//	RETURN_ON_FAILURE(containPrepareEnv(nsjconf));
 	RETURN_ON_FAILURE(containMakeFdsCOE(nsjconf));
 
 	return true;

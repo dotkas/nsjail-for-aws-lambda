@@ -478,6 +478,7 @@ pid_t runChild(nsjconf_t* nsjconf, int netfd, int fd_in, int fd_out, int fd_err)
 	int parent_fd = sv[1];
 
 	pid_t pid = cloneProc(flags, SIGCHLD);
+	PLOG_W("pid=%d", pid);
 	if (pid == 0) {
 		close(parent_fd);
 		newProc(nsjconf, netfd, fd_in, fd_out, fd_err, child_fd);
@@ -502,6 +503,7 @@ pid_t runChild(nsjconf_t* nsjconf, int netfd, int fd_in, int fd_out, int fd_err)
 	char rcvChar;
 	if (util::readFromFd(parent_fd, &rcvChar, sizeof(rcvChar)) == sizeof(rcvChar) &&
 	    rcvChar == kSubprocErrorChar) {
+		PLOG_W("kSubprocErrorChar=%c", kSubprocErrorChar);
 		LOG_W("Received error message from the child process before it has been executed");
 		close(parent_fd);
 		return -1;
